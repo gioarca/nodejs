@@ -1,0 +1,6 @@
+const ordini = [
+  {
+    prodotti: {},
+    utenti: {},
+  },
+];
