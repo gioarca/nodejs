@@ -12,8 +12,8 @@ const getProducts = async (req, res) => {
 
 const getProduct = async (req, res) => {
   try {
-    const { id } = req.params;
-    const product = await Product.findById(id);
+    const { _id } = req.params;
+    const product = await Product.findById(_id);
     res.status(200).json(product);
   } catch {
     res.status(500).json({ error: message.error });
@@ -31,8 +31,8 @@ const createProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
   try {
-    const { id } = req.params;
-    const product = await Product.findByIdAndUpdate(id, req.body);
+    const { _id } = req.params;
+    const product = await Product.findByIdAndUpdate(_id, req.body);
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
@@ -45,8 +45,8 @@ const updateProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
   try {
-    const { id } = req.params;
-    const product = await Product.findByIdAndDelete(id);
+    const { _id } = req.params;
+    const product = await Product.findByIdAndDelete(_id);
     if (!product) {
       res.status(404).json({ message: "Product not found!" });
     }
