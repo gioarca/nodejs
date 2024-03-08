@@ -8,7 +8,9 @@ It's meant to be used for a plant-based e-commerce.
 1. Clone the repository on your local pc;
 2. Download postman;
 3. Open the Visual Studio Code and press `npm i`;
-4. Wait until the process is done and follow the instrucions below. Enjoy!
+4. Wait until the process is done.
+5. Choose to run the code through the command npm start.
+6. In the end follow the instructions below. Enjoy!
 
 ## Available Scripts
 
