@@ -1,6 +1,0 @@
-const ordini = [
-  {
-    prodotti: {},
-    utenti: {},
-  },
-];

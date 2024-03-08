@@ -1,8 +1,14 @@
+# Project info
+
+Hi! This is a back-end API that manage data of users, products and orders.
+It's meant to be used for a plant-based e-commerce.
+
 # Getting Started
 
-Here below there is the direct link to the web-app:
-
-<!--a href="https://react93.netlify.app/" target="_blank">https://react93.netlify.app/</a>-->
+1. Clone the repository on your local pc;
+2. Download postman;
+3. Open the Visual Studio Code and press `npm i`;
+4. Wait until the process is done and follow the instrucions below. Enjoy!
 
 ## Available Scripts
 

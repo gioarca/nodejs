@@ -3,19 +3,36 @@ const Order = require("../models/order.model.js");
 const Product = require("../models/product.model.js");
 const User = require("../models/user.model.js");
 
-// Endpoint per creare un ordine: prende i dati dai modelli creati
-const addOrder = async (req, res) => {
-  try {
-    const { products, users } = req.body;
-    const order = new Order({ products, users });
-    await order.save();
-    res.status(200).json({ data: order });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+// endpoint per creare un ordine
+const addOrder =
+  // async (req, res) => {
+  //   try {
+  //     const order = await Order.find()
+  //       .populate(Product)
+  //       .populate(User)
+  //       .then((result) => {
+  //         res.status(200).json(result);
+  //       })
+  //       .catch((err) => {
+  //         res.send({ message: err.message });
+  //       });
+  //     res.status(200).json(order);
+  //   } catch (error) {
+  //     res.status(500).json({ message: error.message });
+  //   }
+  // };
 
-// Endopoint per aggiornare un ordine
+  async (req, res) => {
+    try {
+      const { products, users } = req.body;
+      const order = new Order({ products, users });
+      await order.save();
+      res.status(200).json({ data: order });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  };
+
 const updateOrder = async (req, res) => {
   try {
     const { _id } = req.params;
@@ -24,14 +41,13 @@ const updateOrder = async (req, res) => {
     if (!order) {
       res.status(404).json({ message: "Order not found" });
     }
-    const updateOrder = await Order.findById(_id);
+    const updateOrder = await Order.findById(id);
     res.status(200).json(updateOrder);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-// Endpoint per cancellare un ordine con input l'id
 const deleteOrder = async (req, res) => {
   try {
     const { _id } = req.params;
@@ -47,7 +63,6 @@ const deleteOrder = async (req, res) => {
   }
 };
 
-// Endpoint per ottenere un singolo ordine cercando con l'id
 const getOrder = async (req, res) => {
   try {
     const { _id } = req.params;
@@ -58,17 +73,6 @@ const getOrder = async (req, res) => {
   }
 };
 
-// Endpoint per ottenere tutti gli ordini
-const getOrders = async (req, res) => {
-  try {
-    const orders = await Order.find().populate("products users");
-    res.status(200).json(orders);
-  } catch (error) {
-    res.status(500).json({ messaggio: error.message });
-  }
-};
-
-// Endpoint per filtrare tutti gli ordini per data di inserimento
 const getOrdersByDate = async (req, res) => {
   try {
     const orders = await Order.find()
@@ -80,16 +84,12 @@ const getOrdersByDate = async (req, res) => {
   }
 };
 
-// Endpoint per filtrare tutti gli ordini per prodotto inserito
-const getOrdersByProducts = async (req, res) => {
+const getOrders = async (req, res) => {
   try {
-    const { productId } = req.params;
-    const orders = await Order.find({ products: productId }).populate(
-      "products users"
-    );
+    const orders = await Order.find().populate("products users");
     res.status(200).json(orders);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ messaggio: error.message });
   }
 };
 
@@ -100,5 +100,4 @@ module.exports = {
   updateOrder,
   deleteOrder,
   getOrdersByDate,
-  getOrdersByProducts,
 };

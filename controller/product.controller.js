@@ -32,7 +32,12 @@ const createProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
   try {
     const { _id } = req.params;
-    const product = await Product.findByIdAndUpdate(_id, req.body);
+    const { name } = req.body;
+    const product = await Product.findByIdAndUpdate(
+      _id,
+      { name },
+      { new: true }
+    );
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
