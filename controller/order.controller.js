@@ -84,9 +84,9 @@ const getOrdersByDate = async (req, res) => {
 const getOrdersByProducts = async (req, res) => {
   try {
     const { productId } = req.params;
-    const orders = await Order.find({ products: productId }).populate(
-      "products users"
-    );
+    const orders = await Order.find({
+      products: { $elemMatch: { $eq: productId } },
+    }).populate("products users");
     res.status(200).json(orders);
   } catch (error) {
     res.status(500).json({ error: error.message });
