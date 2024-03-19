@@ -58,35 +58,18 @@ const getOrder = async (req, res) => {
   }
 };
 
-// Endpoint per ottenere tutti gli ordini
+// Endpoint per filtrare tutti gli ordini per prodotto inserito e data d'inserimento (ByProductsAndDate)
 const getOrders = async (req, res) => {
   try {
-    const orders = await Order.find().populate("products users");
-    res.status(200).json(orders);
-  } catch (error) {
-    res.status(500).json({ messaggio: error.message });
-  }
-};
-
-// Endpoint per filtrare tutti gli ordini per data di inserimento
-const getOrdersByDate = async (req, res) => {
-  try {
-    const orders = await Order.find()
-      .sort("-createdAt")
-      .populate("products users");
-    res.status(200).json(orders);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-// Endpoint per filtrare tutti gli ordini per prodotto inserito
-const getOrdersByProducts = async (req, res) => {
-  try {
     const { productId } = req.params;
+    const { createdAt } = req.params;
     const orders = await Order.find({
       products: { $elemMatch: { $eq: productId } },
-    }).populate("products users");
+      date: { $elemMatch: { $eq: createdAt } },
+    }).populate({
+      path: "products" || "users" || ("products" && "users"),
+      populate: "products users",
+    });
     res.status(200).json(orders);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -94,11 +77,9 @@ const getOrdersByProducts = async (req, res) => {
 };
 
 module.exports = {
+  addOrder,
   getOrders,
   getOrder,
-  addOrder,
   updateOrder,
   deleteOrder,
-  getOrdersByDate,
-  getOrdersByProducts,
 };

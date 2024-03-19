@@ -5,20 +5,15 @@ const {
   updateOrder,
   deleteOrder,
   getOrder,
-  getOrdersByDate,
-  getOrdersByProducts,
   getOrders,
 } = require("../controller/order.controller");
 
-// ricerca per data
-router.get("/byDate", getOrdersByDate);
-
-//ricerca per prodotto
-router.get("/byProduct", getOrdersByProducts);
-
-router.get("/", getOrders);
-router.get("/:_id", getOrder);
 router.post("/", addOrder);
+
+//ricerca per prodotto e data
+router.get("/", getOrders);
+
+router.get("/:_id", getOrder);
 router.put("/:_id", updateOrder);
 router.delete("/:_id", deleteOrder);
 
