@@ -2,19 +2,16 @@ const express = require("express");
 const router = express.Router();
 const {
   addOrder,
+  getOrders,
+  getOrder,
   updateOrder,
   deleteOrder,
-  getOrder,
-  getOrders,
 } = require("../../controller/order.controller");
 
 router.post("/", addOrder);
-
-//ricerca per prodotto e data
-router.get("/", getOrders);
-
-router.get("/:_id", getOrder);
-router.put("/:_id", updateOrder);
-router.delete("/:_id", deleteOrder);
+router.get("/", getOrders); //ricerca per prodotto e data
+router.get("/:id", getOrder);
+router.put("/:id", updateOrder);
+router.delete("/:id", deleteOrder);
 
 module.exports = router;

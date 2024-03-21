@@ -10,9 +10,9 @@ const {
 } = require("../../controller/user.controller");
 
 router.post("/", addUser);
-router.get("/:_id", getUser);
+router.get("/:id", getUser);
 router.get("/", getUsers);
-router.put("/:_id", updateUser);
-router.delete("/:_id", deleteUser);
+router.put("/:id", updateUser);
+router.delete("/:id", deleteUser);
 
 module.exports = router;

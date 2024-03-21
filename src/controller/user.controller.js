@@ -1,25 +1,7 @@
 const { model } = require("mongoose");
 const User = require("../models/user.model");
 
-const getUsers = async (req, res) => {
-  try {
-    const users = await User.find({});
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-const getUser = async (req, res) => {
-  try {
-    const { _id } = req.params;
-    const user = await User.findById(_id);
-    res.status(200).json(user);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
+// Endpoint per aggiungere un utente
 const addUser = async (req, res) => {
   try {
     const user = await User.create(req.body);
@@ -29,11 +11,36 @@ const addUser = async (req, res) => {
   }
 };
 
+// Endpoint per cercare un singolo utente
+const getUsers = async (req, res) => {
+  try {
+    let { limit, offset } = req.query;
+    limit = parseInt(limit) || 100; // imposta un limite pari a 100 se non definito
+    offset = parseInt(offset) || 0; // imposta un limite pari a 0 se non definito
+    const users = await User.find({}).limit(limit).offset(offset);
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Endpoint per mostrare un singolo utente
+const getUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Endpoint per modificare un utente
 const updateUser = async (req, res) => {
   try {
-    const { _id } = req.params;
+    const { id } = req.params;
     const { name } = req.body;
-    const user = await User.findByIdAndUpdate(_id, { name }, { new: true });
+    const user = await User.findByIdAndUpdate(id, { name }, { new: true });
     if (!user) {
       return res.status(404).json({ message: "Utente non trovato!" });
     }
@@ -44,12 +51,13 @@ const updateUser = async (req, res) => {
   }
 };
 
+// Endpoint per cancellare un utente
 const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findByIdAndDelete(id);
     if (!user) {
-      res.status(404).json({ message: "Utente non trovato!" });
+      return res.status(404).json({ message: "Utente non trovato!" }); // aggiunto un return
     }
     res
       .status(200)
