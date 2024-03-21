@@ -1,12 +1,11 @@
 {
-  "name": "nodejs",
+  "name": "api-plant-based",
   "version": "1.0.0",
-  "description": "",
+  "description": "e-commerce plant based",
   "main": "app.js",
   "scripts": {
-    "start": "cross-env ENV=development nodemon app.js",
-    "test": "nodemon app.js",
-    "build": "cross-env NODE_ENV=production nodemon app.js"
+    "start": "cross-env ENV=development nodemon src/app.js",
+    "build": "cross-env NODE_ENV=production nodemon src/app.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,9 +15,9 @@
     "cross-env": "^7.0.3",
     "express": "^4.18.3",
     "express-mongo-sanitize": "^2.2.0",
-    "lodash": "^4.17.21",
     "mongodb": "^6.4.0",
     "mongoose": "^8.2.1",
+    "node": "^21.7.1",
     "nodemon": "^3.1.0",
     "sinon": "^17.0.1",
     "xss-clean": "^0.1.4"

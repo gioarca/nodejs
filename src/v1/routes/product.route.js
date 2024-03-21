@@ -1,5 +1,5 @@
 const express = require("express");
-const Product = require("../models/product.model.js");
+const Product = require("../../models/product.model.js");
 const router = express.Router();
 const {
   getProducts,
@@ -7,7 +7,7 @@ const {
   createProduct,
   updateProduct,
   deleteProduct,
-} = require("../controller/product.controller.js");
+} = require("../../controller/product.controller.js");
 
 router.post("/", createProduct);
 router.get("/", getProducts);

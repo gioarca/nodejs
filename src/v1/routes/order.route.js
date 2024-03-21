@@ -6,7 +6,7 @@ const {
   deleteOrder,
   getOrder,
   getOrders,
-} = require("../controller/order.controller");
+} = require("../../controller/order.controller");
 
 router.post("/", addOrder);
 
